@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AlquilaFacilPlatform.Tests
-build_property.ProjectDir = /Users/lordmathi2741/Documents/Cursos/App-Moviles/AlquilaFacil-Backend/AlquilaFacilPlatform.Tests/
+build_property.ProjectDir = C:\Applications-for-Mobile-Devices-WX63\AlquilaFacil-Backend\AlquilaFacilPlatform.Tests\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

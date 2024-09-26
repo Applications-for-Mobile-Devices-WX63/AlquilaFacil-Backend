@@ -1,33 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "/Users/lordmathi2741/Documents/Cursos/App-Moviles/AlquilaFacil-Backend/AlquilaFacilPlatform.Tests/AlquilaFacilPlatform.Tests.csproj": {}
+    "C:\\Applications-for-Mobile-Devices-WX63\\AlquilaFacil-Backend\\AlquilaFacilPlatform.Tests\\AlquilaFacilPlatform.Tests.csproj": {}
   },
   "projects": {
-    "/Users/lordmathi2741/Documents/Cursos/App-Moviles/AlquilaFacil-Backend/AlquilaFacilPlatform.Tests/AlquilaFacilPlatform.Tests.csproj": {
+    "C:\\Applications-for-Mobile-Devices-WX63\\AlquilaFacil-Backend\\AlquilaFacilPlatform.Tests\\AlquilaFacilPlatform.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/lordmathi2741/Documents/Cursos/App-Moviles/AlquilaFacil-Backend/AlquilaFacilPlatform.Tests/AlquilaFacilPlatform.Tests.csproj",
+        "projectUniqueName": "C:\\Applications-for-Mobile-Devices-WX63\\AlquilaFacil-Backend\\AlquilaFacilPlatform.Tests\\AlquilaFacilPlatform.Tests.csproj",
         "projectName": "AlquilaFacilPlatform.Tests",
-        "projectPath": "/Users/lordmathi2741/Documents/Cursos/App-Moviles/AlquilaFacil-Backend/AlquilaFacilPlatform.Tests/AlquilaFacilPlatform.Tests.csproj",
-        "packagesPath": "/Users/lordmathi2741/.nuget/packages/",
-        "outputPath": "/Users/lordmathi2741/Documents/Cursos/App-Moviles/AlquilaFacil-Backend/AlquilaFacilPlatform.Tests/obj/",
+        "projectPath": "C:\\Applications-for-Mobile-Devices-WX63\\AlquilaFacil-Backend\\AlquilaFacilPlatform.Tests\\AlquilaFacilPlatform.Tests.csproj",
+        "packagesPath": "C:\\Users\\USUARIO\\.nuget\\packages\\",
+        "outputPath": "C:\\Applications-for-Mobile-Devices-WX63\\AlquilaFacil-Backend\\AlquilaFacilPlatform.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/lordmathi2741/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\USUARIO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/lordmathi2741/Documents/Cursos/App-Moviles/AlquilaFacil-Backend/AlquilaFacilPlatform/AlquilaFacilPlatform.csproj": {
-                "projectPath": "/Users/lordmathi2741/Documents/Cursos/App-Moviles/AlquilaFacil-Backend/AlquilaFacilPlatform/AlquilaFacilPlatform.csproj"
+              "C:\\Applications-for-Mobile-Devices-WX63\\AlquilaFacil-Backend\\AlquilaFacilPlatform\\AlquilaFacilPlatform.csproj": {
+                "projectPath": "C:\\Applications-for-Mobile-Devices-WX63\\AlquilaFacil-Backend\\AlquilaFacilPlatform\\AlquilaFacilPlatform.csproj"
               }
             }
           }
@@ -36,6 +38,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -99,26 +106,28 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/lordmathi2741/Documents/Cursos/App-Moviles/AlquilaFacil-Backend/AlquilaFacilPlatform/AlquilaFacilPlatform.csproj": {
+    "C:\\Applications-for-Mobile-Devices-WX63\\AlquilaFacil-Backend\\AlquilaFacilPlatform\\AlquilaFacilPlatform.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/lordmathi2741/Documents/Cursos/App-Moviles/AlquilaFacil-Backend/AlquilaFacilPlatform/AlquilaFacilPlatform.csproj",
+        "projectUniqueName": "C:\\Applications-for-Mobile-Devices-WX63\\AlquilaFacil-Backend\\AlquilaFacilPlatform\\AlquilaFacilPlatform.csproj",
         "projectName": "AlquilaFacilPlatform",
-        "projectPath": "/Users/lordmathi2741/Documents/Cursos/App-Moviles/AlquilaFacil-Backend/AlquilaFacilPlatform/AlquilaFacilPlatform.csproj",
-        "packagesPath": "/Users/lordmathi2741/.nuget/packages/",
-        "outputPath": "/Users/lordmathi2741/Documents/Cursos/App-Moviles/AlquilaFacil-Backend/AlquilaFacilPlatform/obj/",
+        "projectPath": "C:\\Applications-for-Mobile-Devices-WX63\\AlquilaFacil-Backend\\AlquilaFacilPlatform\\AlquilaFacilPlatform.csproj",
+        "packagesPath": "C:\\Users\\USUARIO\\.nuget\\packages\\",
+        "outputPath": "C:\\Applications-for-Mobile-Devices-WX63\\AlquilaFacil-Backend\\AlquilaFacilPlatform\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/lordmathi2741/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\USUARIO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -131,6 +140,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -213,7 +227,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

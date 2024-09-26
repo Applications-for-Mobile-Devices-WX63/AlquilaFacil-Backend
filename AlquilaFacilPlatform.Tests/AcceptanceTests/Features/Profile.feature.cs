@@ -40,8 +40,8 @@ namespace AlquilaFacilPlatform.Tests.AcceptanceTests.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "AcceptanceTests/Features", "Profile Management", "    In order to manage user profiles effectively\n    As an administrator or user\n" +
-                    "    I want to be able to create and update profiles", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "AcceptanceTests/Features", "Profile Management", "    In order to manage user profiles effectively\r\n    As an administrator or user" +
+                    "\r\n    I want to be able to create and update profiles", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
