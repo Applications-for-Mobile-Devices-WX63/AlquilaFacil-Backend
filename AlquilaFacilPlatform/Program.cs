@@ -1,3 +1,9 @@
+using AlquilaFacilPlatform.Booking.Application.CommandServices;
+using AlquilaFacilPlatform.Booking.Application.OutBoundService;
+using AlquilaFacilPlatform.Booking.Application.QueryServices;
+using AlquilaFacilPlatform.Booking.Domain.Repositories;
+using AlquilaFacilPlatform.Booking.Domain.Services;
+using AlquilaFacilPlatform.Booking.Infrastructure.Persistence.EFC.Repositories;
 using AlquilaFacilPlatform.Contacts.Application.Internal.CommandServices;
 using AlquilaFacilPlatform.Contacts.Application.Internal.OutboundServices;
 using AlquilaFacilPlatform.Contacts.Application.Internal.QueryService;
@@ -173,6 +179,13 @@ builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IContactCommandService, ContactCommandService>();
 builder.Services.AddScoped<IContactQueryService, ContactQueryService>();
 builder.Services.AddScoped<IExternalUserService, ExternalUserService>();
+
+// Booking Bounded Context Injection Configuration
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+builder.Services.AddScoped<IReservationCommandService, ReservationCommandService>();
+builder.Services.AddScoped<IReservationQueryService, ReservationQueryService>();
+builder.Services.AddScoped<IReservationLocalExternalService, ReservationLocalExternalService>();
+builder.Services.AddScoped<IUserReservationExternalService, UserReservationExternalService>();
 
 
 builder.Services.AddScoped<ISubscriptionStatusRepository, SubscriptionStatusRepository>();

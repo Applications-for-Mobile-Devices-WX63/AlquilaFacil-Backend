@@ -1,3 +1,4 @@
+using AlquilaFacilPlatform.Booking.Domain.Model.Aggregates;
 using AlquilaFacilPlatform.Contacts.Domain.Model.Aggregates;
 using AlquilaFacilPlatform.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using AlquilaFacilPlatform.Subscriptions.Domain.Model.Aggregates;
@@ -198,6 +199,15 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<UserRole>().HasKey(ur => ur.Id);
         builder.Entity<UserRole>().Property(ur => ur.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<UserRole>().Property(ur => ur.Role).IsRequired();
+
+
+        builder.Entity<Reservation>().HasKey(r => r.Id);
+        builder.Entity<Reservation>().Property(r => r.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Reservation>().Property(r => r.StartDate).IsRequired();
+        builder.Entity<Reservation>().Property(r => r.EndDate).IsRequired();
+        builder.Entity<User>().HasMany<Reservation>().WithOne().HasForeignKey(r => r.UserId);
+        builder.Entity<Local>().HasMany<Reservation>().WithOne().HasForeignKey(r => r.LocalId);
+        
         
             
         /*builder.Entity<User>()
