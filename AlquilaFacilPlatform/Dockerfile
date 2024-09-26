@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
@@ -6,13 +6,14 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY AlquilaFacilPlatform.csproj .
-RUN dotnet restore "AlquilaFacilPlatform.csproj"
+COPY ["AlquilaFacilPlatform/AlquilaFacilPlatform.csproj", "AlquilaFacilPlatform/"]
+RUN dotnet restore "AlquilaFacilPlatform/AlquilaFacilPlatform.csproj"
 COPY . .
-WORKDIR "/src"
+WORKDIR "/src/AlquilaFacilPlatform"
 RUN dotnet build "AlquilaFacilPlatform.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "AlquilaFacilPlatform.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
