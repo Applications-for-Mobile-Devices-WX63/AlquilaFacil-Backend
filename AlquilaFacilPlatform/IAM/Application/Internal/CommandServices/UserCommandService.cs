@@ -38,6 +38,8 @@ public class UserCommandService(
             !command.Password.Any(char.IsLower) || !command.Password.Any(c => symbols.Contains(c)))
             throw new Exception(
                 "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit and one special character");
+        if(!command.Email.Contains('@'))
+            throw new Exception("Invalid email address");
 
         if (userRepository.ExistsByUsername(command.Username))
             throw new Exception($"Username {command.Username} is already taken");
