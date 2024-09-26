@@ -52,7 +52,7 @@ public class ReservationController(IReservationCommandService reservationCommand
         return Ok(reservationResource);
     }
 
-    [HttpGet]
+    [HttpGet("by-start-date/{startDate}")]
     public async Task<IActionResult> GetReservationByStartDateAsync(DateTime startDate)
     {
         var query = new GetReservationByStartDate(startDate);
@@ -61,7 +61,7 @@ public class ReservationController(IReservationCommandService reservationCommand
         return Ok(reservationResource);
     }
 
-    [HttpGet]
+    [HttpGet("by-end-date/{endDate}")]
     public async Task<IActionResult> GetReservationByEndDateAsync(DateTime endDate)
     {
         var query = new GetReservationByEndDate(endDate);
