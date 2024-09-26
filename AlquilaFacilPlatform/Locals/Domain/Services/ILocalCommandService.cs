@@ -6,4 +6,5 @@ namespace AlquilaFacilPlatform.Locals.Domain.Services;
 public interface ILocalCommandService
 {
     Task<Local?> Handle(CreateLocalCommand command);
+    Task<Local?> Handle(UpdateLocalCommand command);
 }

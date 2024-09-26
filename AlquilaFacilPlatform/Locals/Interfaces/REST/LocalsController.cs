@@ -45,4 +45,14 @@ public class LocalsController(ILocalCommandService localCommandService, ILocalQu
         return Ok(localResource);
     }
     
+    [HttpPut("{localId:int}")]
+    public async Task<IActionResult> UpdateLocal(int localId, UpdateLocalResource resource)
+    {
+        var updateLocalCommand = UpdateLocalCommandFromResourceAssembler.ToCommandFromResource(localId, resource);
+        var local = await localCommandService.Handle(updateLocalCommand);
+        if (local is null) return BadRequest();
+        var localResource = LocalResourceFromEntityAssembler.ToResourceFromEntity(local);
+        return Ok(localResource);
+    }
+    
 }

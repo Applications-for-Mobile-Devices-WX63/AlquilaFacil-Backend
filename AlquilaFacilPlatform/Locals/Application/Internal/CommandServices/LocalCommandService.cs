@@ -30,4 +30,26 @@ public class LocalCommandService (ILocalRepository localRepository, ILocalCatego
         await unitOfWork.CompleteAsync();
         return local;
     }
+
+    public async Task<Local?> Handle(UpdateLocalCommand command)
+    {
+        var local = await localRepository.FindByIdAsync(command.Id);
+        if (local == null)
+        {
+            throw new Exception("Local not found");
+        }
+        var localCategory = localCategoryRepository.FindByIdAsync(command.LocalCategoryId);
+        if (localCategory == null)
+        {
+            throw new Exception("Local category not found");
+        }
+
+        if (command.Price <= 0)
+        {
+            throw new Exception("Price must be greater than 0");
+        }
+        localRepository.Update(local);
+        await unitOfWork.CompleteAsync();
+        return local;
+    }
 }
