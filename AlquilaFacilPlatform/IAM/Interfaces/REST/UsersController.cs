@@ -25,7 +25,7 @@ namespace AlquilaFacilPlatform.IAM.Interfaces.REST;
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 public class UsersController(
-    IUserQueryService userQueryService
+    IUserQueryService userQueryService, IUserCommandService userCommandService
     ) : ControllerBase
 {
     
@@ -60,5 +60,15 @@ public class UsersController(
         var users = await userQueryService.Handle(getAllUsersQuery);
         var userResources = users.Select(UserResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(userResources);
+    }
+    
+    [HttpPut("{userId:int}")]
+    public async Task<IActionResult> UpdateUser(int userId, [FromBody] UpdateUsernameResource updateUsernameResource)
+    {
+        var updateUserCommand =
+            UpdateUsernameCommandFromResourceAssembler.ToUpdateUsernameCommand(userId, updateUsernameResource);
+        var user = await userCommandService.Handle(updateUserCommand);
+        var userResource = UserResourceFromEntityAssembler.ToResourceFromEntity(user!);
+        return Ok(userResource);
     }
 }
