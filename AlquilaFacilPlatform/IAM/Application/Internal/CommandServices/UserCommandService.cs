@@ -66,21 +66,13 @@ public class UserCommandService(
         if (userToUpdate == null)
             throw new Exception("User not found");
         var userExists = userRepository.ExistsByUsername(command.Username);
-        if (!userExists)
+        if (userExists)
         {
             throw new Exception("This username already exists");
         }
 
         userToUpdate.UpdateUsername(command.Username);
-        try
-        {
-            await unitOfWork.CompleteAsync();
-        }
-        catch (Exception e)
-        {
-            throw new Exception($"An error occurred while updating username: {e.Message}");
-        }
-
+        await unitOfWork.CompleteAsync();
         return userToUpdate;
     }
     
