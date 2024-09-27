@@ -3,12 +3,13 @@ using AlquilaFacilPlatform.Booking.Domain.Model.Aggregates;
 using AlquilaFacilPlatform.Booking.Domain.Model.Commands;
 using AlquilaFacilPlatform.Booking.Domain.Repositories;
 using AlquilaFacilPlatform.Booking.Domain.Services;
+using AlquilaFacilPlatform.Shared.Domain.Repositories;
 
 namespace AlquilaFacilPlatform.Booking.Application.CommandServices;
 
 public class ReservationCommandService(
  IUserReservationExternalService userReservationExternalService,
- IReservationLocalExternalService reservationLocalExternalService, IReservationRepository reservationRepository) : IReservationCommandService
+ IReservationLocalExternalService reservationLocalExternalService, IReservationRepository reservationRepository,IUnitOfWork unitOfWork) : IReservationCommandService
 {
  public async Task<Reservation> Handle(CreateReservationCommand reservation)
  {
@@ -27,17 +28,18 @@ public class ReservationCommandService(
      {
          throw new Exception("Start date must be less than end date");
      }
-     if (reservation.StartDate > DateTime.Now)
+     if (reservation.StartDate.Year < DateTime.Now.Year || reservation.StartDate.Month < DateTime.Now.Month || reservation.StartDate.Day < DateTime.Now.Day)
      {
          throw new Exception("Start date must be greater than current date");
      }
-     if (reservation.EndDate < DateTime.Now)
+     if (reservation.EndDate.Year < DateTime.Now.Year || reservation.EndDate.Month < DateTime.Now.Month || reservation.EndDate.Day < DateTime.Now.Day)
      {
-            throw new Exception("End date must be greater than current date");
+         throw new Exception("End date must be greater than current date");
      }
 
      var reservationCreated = new Reservation(reservation);
      await reservationRepository.AddAsync(reservationCreated);
+     await unitOfWork.CompleteAsync();
      return reservationCreated;
 
  }
@@ -48,9 +50,9 @@ public class ReservationCommandService(
      {
          throw new Exception("Start date must be less than end date");
      }
-     if (reservation.StartDate > DateTime.Now)
+     if (reservation.StartDate.Year < DateTime.Now.Year || reservation.StartDate.Month < DateTime.Now.Month || reservation.StartDate.Day < DateTime.Now.Day)
      {
-         throw new Exception("Start date must be greater than current date");
+            throw new Exception("Start date must be greater than current date");
      }
      if (reservation.EndDate < DateTime.Now)
      {
@@ -63,6 +65,8 @@ public class ReservationCommandService(
             throw new Exception("Reservation does not exist");
         }
         reservationToUpdate.UpdateDate(reservation);
+        reservationRepository.Update(reservationToUpdate);
+        await unitOfWork.CompleteAsync();
         return reservationToUpdate;
  }
 
@@ -75,6 +79,7 @@ public class ReservationCommandService(
      }
 
      reservationRepository.Remove(reservationToDelete);
+     await unitOfWork.CompleteAsync();
      return reservationToDelete;
  }
 }
