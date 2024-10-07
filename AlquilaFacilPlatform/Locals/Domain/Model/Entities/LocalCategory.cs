@@ -1,4 +1,4 @@
-using AlquilaFacilPlatform.Locals.Domain.Model.Aggregates;
+
 
 namespace AlquilaFacilPlatform.Locals.Domain.Model.Entities;
 

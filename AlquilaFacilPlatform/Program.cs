@@ -25,6 +25,7 @@ using AlquilaFacilPlatform.IAM.Interfaces.ACL;
 using AlquilaFacilPlatform.IAM.Interfaces.ACL.Service;
 using AlquilaFacilPlatform.Locals.Application.Internal.CommandServices;
 using AlquilaFacilPlatform.Locals.Application.Internal.QueryServices;
+using AlquilaFacilPlatform.Locals.Domain.Model.Commands;
 using AlquilaFacilPlatform.Locals.Domain.Repositories;
 using AlquilaFacilPlatform.Locals.Domain.Services;
 using AlquilaFacilPlatform.Locals.Infraestructure.Persistence.EFC.Repositories;
@@ -60,6 +61,7 @@ builder.Services.AddControllers( options => options.Conventions.Add(new KebabCas
 
 // Add Database Connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var developmentString = builder.Configuration.GetConnectionString("DevelopmentConnection");
 
 // Configure Database Context and Logging Levels
 
@@ -68,7 +70,7 @@ builder.Services.AddDbContext<AppDbContext>(
     {
         if (builder.Environment.IsDevelopment())
         {
-            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+            options.UseMySql(developmentString, ServerVersion.AutoDetect(developmentString))
                 .LogTo(Console.WriteLine, LogLevel.Information)
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors();
@@ -170,8 +172,8 @@ builder.Services.AddScoped<ILocalQueryService, LocalQueryService>();
 builder.Services.AddScoped<ILocalsContextFacade, LocalsContextFacade>();
 builder.Services.AddScoped<ILocalRepository, LocalRepository>();
 builder.Services.AddScoped<ILocalCategoryRepository, LocalCategoryRepository>();
+
 builder.Services.AddScoped<ILocalCategoryCommandService, LocalCategoryCommandService>();
-builder.Services.AddScoped<ILocalCategoryQueryService, LocalCategoryQueryService>();
 
 // Contact Bounded Context Injection Configuration
 
@@ -226,6 +228,9 @@ using (var scope = app.Services.CreateScope())
     
     var userRoleCommandService = services.GetRequiredService<ISeedUserRoleCommandService>();
     await userRoleCommandService.Handle(new SeedUserRolesCommand());
+    
+    var localCategoryTypeCommandService = services.GetRequiredService<ILocalCategoryCommandService>();
+    await localCategoryTypeCommandService.Handle(new SeedLocalCategoriesCommand());
 }
 
 
