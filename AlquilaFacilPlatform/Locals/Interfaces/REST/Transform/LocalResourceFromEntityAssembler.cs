@@ -17,7 +17,8 @@ public static class LocalResourceFromEntityAssembler
             local.DescriptionMessage,
             local.LocalCategoryId,
             local.UserId,
-            local.Features
+            local.Features,
+            local.Capacity
             );
     }
 }

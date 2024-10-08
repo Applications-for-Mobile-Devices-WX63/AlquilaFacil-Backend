@@ -74,6 +74,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Local>().HasKey(p => p.Id);
         builder.Entity<Local>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Local>().Property(p => p.Features).IsRequired();
+        builder.Entity<Local>().Property(p => p.Capacity).IsRequired();
         builder.Entity<Local>().OwnsOne(p => p.Price,
             n =>
             {

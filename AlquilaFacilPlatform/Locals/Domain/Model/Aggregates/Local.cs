@@ -15,12 +15,13 @@ public partial class Local
         Place = new CityPlace();
         Description = new DescriptionMessage();
         Features = string.Empty;
+        Capacity = 0;
         UserId = 0;
     }
     
     
     public Local(string district, string street, string localType, string country, string city, int price, 
-           string photoUrl, string descriptionMessage , int localCategoryId,int userId, string features) : this()
+           string photoUrl, string descriptionMessage , int localCategoryId,int userId, string features, int capacity) : this()
     {
         LName = new LocalName(localType);
         Address = new StreetAddress(district, street);
@@ -31,6 +32,7 @@ public partial class Local
         LocalCategoryId = localCategoryId;
         UserId = userId;
         Features = features;
+        Capacity = capacity;
         
     }
 
@@ -44,12 +46,15 @@ public partial class Local
         Place = new CityPlace(command.Country, command.City);
         LocalCategoryId = command.LocalCategoryId;
         Features = command.Features;
+        Capacity = command.Capacity;
         UserId = command.UserId;
     }
 
     public int Id { get; }
     
     public string Features { get; }
+    
+    public int Capacity { get; set; }
     public LocalName LName { get; private set; }
     public NightPrice Price { get; private set; }
     public PhotoUrl Photo { get; private set; }
