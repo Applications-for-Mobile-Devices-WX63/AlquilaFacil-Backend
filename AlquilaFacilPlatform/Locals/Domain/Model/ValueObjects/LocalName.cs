@@ -1,8 +1,8 @@
 namespace AlquilaFacilPlatform.Locals.Domain.Model.ValueObjects;
 
-public record LocalType(string TypeLocal)
+public record LocalName(string TypeLocal)
 {
-    public LocalType() : this(String.Empty)
+    public LocalName() : this(String.Empty)
     {
         
     }

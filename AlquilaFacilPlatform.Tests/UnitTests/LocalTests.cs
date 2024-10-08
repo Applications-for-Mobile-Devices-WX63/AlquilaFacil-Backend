@@ -10,7 +10,7 @@ public class LocalTests
     {
         string district = "Miraflores";
         string street = "Malecon Cisneros";
-        string localType = "Casa Urbana";
+        string localName = "Casa Urbana";
         string country = "Perú";
         string city = "Lima";
         int price = 125;            // per night
@@ -18,11 +18,12 @@ public class LocalTests
         string descriptionMessage = "Esta casa urbana combina diseño contemporáneo con comodidades de lujo. Disfruta de espacios amplios, luz natural y una ubicación privilegiada cerca de restaurantes, tiendas y parques.";
         int localCategoryId = 1;
         int userId = 1;
+        string features = "Wi-Fi, Baños";
 
-        var local = new Local(district, street, localType, country, city, price, photoUrl, descriptionMessage,
-            localCategoryId, userId);
+        var local = new Local(district, street, localName, country, city, price, photoUrl, descriptionMessage,
+            localCategoryId, userId,features);
         
-        Assert.Equal(localType, local.LocalType);
+        Assert.Equal(localName, local.LocalName);
         Assert.Equal(district, local.Address.District);
         Assert.Equal(street, local.Address.Street);
         Assert.Equal(price, local.Price.PriceNight);
@@ -45,17 +46,17 @@ public class LocalTests
             125,
             "https://a0.muscache.com/im/pictures/pro_photo_tool/Hosting-14127027-unapproved/original/af62b9d0-db54-4d2d-aa89-20cc5a40394f.JPEG?im_w=720",
             "Esta casa urbana combina diseño contemporáneo con comodidades de lujo. Disfruta de espacios amplios, luz natural y una ubicación privilegiada cerca de restaurantes, tiendas y parques.",
-            1,1);
+            1,1,"Wi-Fi, Baños");
         
         var local = new Local(createLocal);
 
-        Assert.Equal(createLocal.LocalType, local.LocalType);
+        Assert.Equal(createLocal.LocalType, local.LocalName);
         Assert.Equal(createLocal.District, local.Address.District);
         Assert.Equal(createLocal.Street, local.Address.Street);
         Assert.Equal(createLocal.Price, local.Price.PriceNight);
         Assert.Equal(createLocal.PhotoUrl, local.PhotoUrl);
         Assert.Equal(createLocal.Country, local.Place.Country);
         Assert.Equal(createLocal.City, local.Place.City);
-        Assert.Equal(2, local.LocalCategoryId);     // Verify LocalCategoryId remains the same
+        Assert.Equal(2, local.LocalCategoryId);    
     }
 }

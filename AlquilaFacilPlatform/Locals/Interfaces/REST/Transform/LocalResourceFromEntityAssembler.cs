@@ -10,12 +10,14 @@ public static class LocalResourceFromEntityAssembler
         return new LocalResource(
             local.Id, 
             local.StreetAddress, 
-            local.LocalType,
+            local.LocalName,
             local.CityPlace,
             local.NightPrice, 
             local.PhotoUrl,
             local.DescriptionMessage,
             local.LocalCategoryId,
-            local.UserId);
+            local.UserId,
+            local.Features
+            );
     }
 }

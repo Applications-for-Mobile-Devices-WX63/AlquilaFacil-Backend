@@ -73,13 +73,14 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         
         builder.Entity<Local>().HasKey(p => p.Id);
         builder.Entity<Local>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Local>().Property(p => p.Features).IsRequired();
         builder.Entity<Local>().OwnsOne(p => p.Price,
             n =>
             {
                 n.WithOwner().HasForeignKey("Id");
                 n.Property(p => p.PriceNight).HasColumnName("PriceNight");
             });
-        builder.Entity<Local>().OwnsOne(p => p.LType,
+        builder.Entity<Local>().OwnsOne(p => p.LName,
             e =>
             {
                 e.WithOwner().HasForeignKey("Id");
