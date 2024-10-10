@@ -7,4 +7,5 @@ namespace AlquilaFacilPlatform.Locals.Domain.Repositories;
 public interface ILocalCategoryRepository : IBaseRepository<LocalCategory>
 {
     Task<bool> ExistsLocalCategory(EALocalCategoryTypes type);
+    Task<IEnumerable<LocalCategory>> GetAllLocalCategories();
 }

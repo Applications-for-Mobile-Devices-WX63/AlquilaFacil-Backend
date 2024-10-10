@@ -14,4 +14,9 @@ public class LocalCategoryRepository(AppDbContext context)
     {
         return context.Set<LocalCategory>().AnyAsync(x => x.Name == type.ToString());
     }
+
+    public async Task<IEnumerable<LocalCategory>> GetAllLocalCategories()
+    {
+        return await context.Set<LocalCategory>().ToListAsync();
+    }
 }
