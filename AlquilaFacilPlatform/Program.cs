@@ -174,6 +174,7 @@ builder.Services.AddScoped<ILocalRepository, LocalRepository>();
 builder.Services.AddScoped<ILocalCategoryRepository, LocalCategoryRepository>();
 
 builder.Services.AddScoped<ILocalCategoryCommandService, LocalCategoryCommandService>();
+builder.Services.AddScoped<ILocalCategoryQueryService, LocalCategoryQueryService>();
 
 // Contact Bounded Context Injection Configuration
 
