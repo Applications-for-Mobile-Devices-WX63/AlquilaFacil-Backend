@@ -7,6 +7,7 @@ using AlquilaFacilPlatform.IAM.Domain.Model.Aggregates;
 using AlquilaFacilPlatform.IAM.Domain.Model.Entities;
 using AlquilaFacilPlatform.Locals.Domain.Model.Aggregates;
 using AlquilaFacilPlatform.Locals.Domain.Model.Entities;
+using AlquilaFacilPlatform.Notifications.Domain.Models.Aggregates;
 using AlquilaFacilPlatform.Profiles.Domain.Model.Aggregates;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -210,6 +211,14 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Reservation>().Property(r => r.EndDate).IsRequired();
         builder.Entity<User>().HasMany<Reservation>().WithOne().HasForeignKey(r => r.UserId);
         builder.Entity<Local>().HasMany<Reservation>().WithOne().HasForeignKey(r => r.LocalId);
+
+
+        builder.Entity<Notification>().HasKey(n => n.Id);
+        builder.Entity<Notification>().Property(n => n.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Notification>().Property(n => n.Title).IsRequired();
+        builder.Entity<Notification>().Property(n => n.Description).IsRequired();
+        
+        builder.Entity<User>().HasMany<Notification>().WithOne().HasForeignKey(n => n.UserId);
         
         
             

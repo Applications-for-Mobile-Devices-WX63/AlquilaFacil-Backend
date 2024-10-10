@@ -31,6 +31,11 @@ using AlquilaFacilPlatform.Locals.Domain.Services;
 using AlquilaFacilPlatform.Locals.Infraestructure.Persistence.EFC.Repositories;
 using AlquilaFacilPlatform.Locals.Interfaces.ACL;
 using AlquilaFacilPlatform.Locals.Interfaces.ACL.Services;
+using AlquilaFacilPlatform.Notifications.Application.CommandServices;
+using AlquilaFacilPlatform.Notifications.Application.QueryServices;
+using AlquilaFacilPlatform.Notifications.Domain.Repositories;
+using AlquilaFacilPlatform.Notifications.Domain.Services;
+using AlquilaFacilPlatform.Notifications.Infrastructure.Persistence.EFC.Repositories;
 using AlquilaFacilPlatform.Profiles.Application.Internal.CommandServices;
 using AlquilaFacilPlatform.Profiles.Application.Internal.OutboundServices;
 using AlquilaFacilPlatform.Profiles.Application.Internal.QueryServices;
@@ -205,6 +210,10 @@ builder.Services.AddScoped<IUserExternalService, UserExternalService>();
 
 builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddScoped<ISeedUserRoleCommandService, SeedUserRoleCommandService>();
+
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<INotificationCommandService, NotificationCommandService>();
+builder.Services.AddScoped<INotificationQueryService, NotificationQueryService>();
 
 // IAM Bounded Context Injection Configuration
 builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
