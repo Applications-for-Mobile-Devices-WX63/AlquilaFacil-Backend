@@ -62,6 +62,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<LocalCategory>().HasKey(c => c.Id);
         builder.Entity<LocalCategory>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<LocalCategory>().Property(c => c.Name).IsRequired().HasMaxLength(30);
+        builder.Entity<LocalCategory>().Property(c => c.PhotoUrl).IsRequired();
 
 
         builder.Entity<LocalCategory>().HasMany<Local>()
