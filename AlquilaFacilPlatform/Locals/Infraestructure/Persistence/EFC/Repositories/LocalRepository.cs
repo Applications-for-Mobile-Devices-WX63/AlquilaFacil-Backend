@@ -13,6 +13,20 @@ public class LocalRepository(AppDbContext context) : BaseRepository<Local>(conte
 
     public HashSet<string> GetAllDistrictsAsync()
     {
-        return context.Set<Local>().Select(x => x.StreetAddress).ToHashSet();
+
+        var placeInfo = context.Set<Local>().Select(x => " " + x.Place.Country + " " +  x.Place.City).Distinct();
+        var districtsInfo = context.Set<Local>().Select(x => x.StreetAddress).ToList();
+        var districts = new HashSet<string>();
+        foreach (var place in placeInfo)
+        {
+            foreach (var district in districtsInfo)
+            {
+                var districtName = district.Split(",")[0];
+                districts.Add(districtName + "," + place);
+            }
+        }
+
+        return districts;
     }
+
 }
