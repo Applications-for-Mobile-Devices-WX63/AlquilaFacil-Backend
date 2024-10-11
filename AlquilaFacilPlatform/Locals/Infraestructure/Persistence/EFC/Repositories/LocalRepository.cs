@@ -10,11 +10,9 @@ namespace AlquilaFacilPlatform.Locals.Infraestructure.Persistence.EFC.Repositori
 
 public class LocalRepository(AppDbContext context) : BaseRepository<Local>(context), ILocalRepository
 {
-    
-    public async Task<IEnumerable<Local>> FindByLocalCategoryIdAsync(int localCategoryId)
+
+    public HashSet<string> GetAllDistrictsAsync()
     {
-        return await Context.Set<Local>()
-            .Where(local => local.LocalCategoryId == localCategoryId)
-            .ToListAsync();
+        return context.Set<Local>().Select(x => x.StreetAddress).ToHashSet();
     }
 }

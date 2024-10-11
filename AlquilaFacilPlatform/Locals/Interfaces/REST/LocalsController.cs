@@ -55,4 +55,12 @@ public class LocalsController(ILocalCommandService localCommandService, ILocalQu
         return Ok(localResource);
     }
     
+    [HttpGet("getAllDistricts")]
+    public IActionResult GetAllDistricts()
+    {
+        var getAllLocalDistrictsQuery = new GetAllLocalDistrictsQuery();
+        var districts = localQueryService.Handle(getAllLocalDistrictsQuery);
+        return Ok(districts);
+    }
+    
 }

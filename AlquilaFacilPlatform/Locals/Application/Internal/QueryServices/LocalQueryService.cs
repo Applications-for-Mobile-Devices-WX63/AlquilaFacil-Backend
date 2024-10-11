@@ -17,8 +17,8 @@ public class LocalQueryService(ILocalRepository localRepository) : ILocalQuerySe
         return await localRepository.FindByIdAsync(query.LocalId);
     }
 
-    public async Task<IEnumerable<Local>> Handle(GetAllLocalsByLocalCategoryIdQuery query)
+    public HashSet<string> Handle(GetAllLocalDistrictsQuery query)
     {
-        return await localRepository.FindByLocalCategoryIdAsync(query.LocalCategoryId);
+        return localRepository.GetAllDistrictsAsync();
     }
 }
