@@ -14,7 +14,7 @@ public class LocalRepository(AppDbContext context) : BaseRepository<Local>(conte
     public HashSet<string> GetAllDistrictsAsync()
     {
 
-        var placeInfo = context.Set<Local>().Select(x => " " + x.Place.Country + " " +  x.Place.City).Distinct();
+        var placeInfo = context.Set<Local>().Select(x => " " + x.Place.City + ", " +  x.Place.Country).Distinct();
         var districtsInfo = context.Set<Local>().Select(x => x.StreetAddress).ToList();
         var districts = new HashSet<string>();
         foreach (var place in placeInfo)
