@@ -55,6 +55,16 @@ public class LocalsController(ILocalCommandService localCommandService, ILocalQu
         return Ok(localResource);
     }
     
+    
+    [HttpGet("search-by-category-id-capacity-range/{categoryId:int}/{minCapacity:int}/{maxCapacity:int}")]
+    public async Task<IActionResult> SearchByCategoryIdAndCapacityRange(int categoryId, int minCapacity, int maxCapacity)
+    {
+        var searchByCategoryIdAndCapacityRangeQuery = new GetLocalsByCategoryIdAndCapacityRangeQuery(categoryId, minCapacity, maxCapacity);
+        var locals = await localQueryService.Handle(searchByCategoryIdAndCapacityRangeQuery);
+        var localResources = locals.Select(LocalResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(localResources);
+    }
+    
     [HttpGet("get-all-districts")]
     public IActionResult GetAllDistricts()
     {

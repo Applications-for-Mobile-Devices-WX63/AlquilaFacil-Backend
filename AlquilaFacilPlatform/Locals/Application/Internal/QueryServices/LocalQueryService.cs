@@ -21,4 +21,9 @@ public class LocalQueryService(ILocalRepository localRepository) : ILocalQuerySe
     {
         return localRepository.GetAllDistrictsAsync();
     }
+
+    public async Task<IEnumerable<Local>> Handle(GetLocalsByCategoryIdAndCapacityRangeQuery query)
+    {
+        return await localRepository.GetLocalsByCategoryIdAndCapacityrange(query.LocalCategoryId, query.MinCapacity, query.MaxCapacity);
+    }
 }

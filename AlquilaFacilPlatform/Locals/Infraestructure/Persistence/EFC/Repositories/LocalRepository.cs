@@ -29,4 +29,8 @@ public class LocalRepository(AppDbContext context) : BaseRepository<Local>(conte
         return districts;
     }
 
+    public async Task<IEnumerable<Local>> GetLocalsByCategoryIdAndCapacityrange(int categoryId, int minCapacity, int maxCapacity)
+    {
+        return await context.Set<Local>().Where(x => x.LocalCategoryId == categoryId && x.Capacity >= minCapacity && x.Capacity <= maxCapacity).ToListAsync();
+    }
 }
