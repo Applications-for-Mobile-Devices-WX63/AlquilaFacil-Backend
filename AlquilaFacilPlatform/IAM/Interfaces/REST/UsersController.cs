@@ -62,6 +62,14 @@ public class UsersController(
         return Ok(userResources);
     }
     
+    [HttpGet("get-username/{userId:int}")]
+    public async Task<IActionResult> GetUsernameById(int userId)
+    {
+        var getUsernameByIdQuery = new GetUsernameByIdQuery(userId);
+        var username = await userQueryService.Handle(getUsernameByIdQuery);
+        return Ok(username);
+    }
+    
     [HttpPut("{userId:int}")]
     public async Task<IActionResult> UpdateUser(int userId, [FromBody] UpdateUsernameResource updateUsernameResource)
     {

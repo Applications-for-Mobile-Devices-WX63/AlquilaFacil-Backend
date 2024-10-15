@@ -40,6 +40,11 @@ public class UserRepository (AppDbContext context) : BaseRepository<User>(contex
         return Context.Set<User>().Any(user => user.Username.Equals(username));
     }
 
+    public async Task<string?> GetUsernameByIdAsync(int userId)
+    {
+        return await Context.Set<User>().Where(user => user.Id == userId).Select(user => user.Username).FirstOrDefaultAsync();
+    }
+
     public bool ExistsById(int userId)
     {
         return Context.Set<User>().Any(user => user.Id == userId);
