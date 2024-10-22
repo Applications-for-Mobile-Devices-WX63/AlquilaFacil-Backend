@@ -24,6 +24,7 @@ using AlquilaFacilPlatform.IAM.Infrastructure.Tokens.JWT.Services;
 using AlquilaFacilPlatform.IAM.Interfaces.ACL;
 using AlquilaFacilPlatform.IAM.Interfaces.ACL.Service;
 using AlquilaFacilPlatform.Locals.Application.Internal.CommandServices;
+using AlquilaFacilPlatform.Locals.Application.Internal.OutboundServices;
 using AlquilaFacilPlatform.Locals.Application.Internal.QueryServices;
 using AlquilaFacilPlatform.Locals.Domain.Model.Commands;
 using AlquilaFacilPlatform.Locals.Domain.Repositories;
@@ -172,6 +173,8 @@ builder.Services.AddScoped<IInvoiceCommandService, InvoiceCommandService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Profiles Bounded Context Injection Configuration
+
+
 builder.Services.AddScoped<ILocalCommandService, LocalCommandService>();
 builder.Services.AddScoped<ILocalQueryService, LocalQueryService>();
 builder.Services.AddScoped<ILocalsContextFacade, LocalsContextFacade>();
@@ -180,6 +183,13 @@ builder.Services.AddScoped<ILocalCategoryRepository, LocalCategoryRepository>();
 
 builder.Services.AddScoped<ILocalCategoryCommandService, LocalCategoryCommandService>();
 builder.Services.AddScoped<ILocalCategoryQueryService, LocalCategoryQueryService>();
+
+builder.Services.AddScoped<ICommentCommandService, CommentCommandService>();
+builder.Services.AddScoped<ICommentQueryService, CommentQueryService>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
+builder.Services.AddScoped<IUserCommentExternalService, UserCommentExternalService>();
+
 
 // Contact Bounded Context Injection Configuration
 
