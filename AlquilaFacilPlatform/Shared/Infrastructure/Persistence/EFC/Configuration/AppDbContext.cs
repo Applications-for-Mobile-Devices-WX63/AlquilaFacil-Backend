@@ -59,6 +59,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
 
         builder.Entity<Subscription>().HasOne<Invoice>().WithOne().HasForeignKey<Invoice>(i => i.SubscriptionId);
 
+        //Local Context
 
         builder.Entity<LocalCategory>().HasKey(c => c.Id);
         builder.Entity<LocalCategory>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
@@ -121,7 +122,28 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             });
 
         builder.Entity<Local>().HasOne<User>().WithMany().HasForeignKey(l => l.UserId);
-            
+
+        builder.Entity<Comment>().HasKey(c => c.Id);
+        builder.Entity<Comment>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
+
+        builder.Entity<Comment>().OwnsOne(c => c.Text,
+            n =>
+            {
+                n.WithOwner().HasForeignKey("Id");
+                n.Property(g => g.Text).HasColumnName("Text");
+            });
+        
+        builder.Entity<Comment>().OwnsOne(c => c.Rating,
+            n =>
+            {
+                n.WithOwner().HasForeignKey("Id");
+                n.Property(g => g.Rating).HasColumnName("Rating");
+            });
+
+        builder.Entity<Comment>().HasOne<User>().WithMany().HasForeignKey(u => u.UserId);
+        builder.Entity<Comment>().HasOne<Local>().WithMany().HasForeignKey(l => l.LocalId);
+        
+        
         // Profile Context
         
         builder.Entity<Profile>().HasKey(p => p.Id);
