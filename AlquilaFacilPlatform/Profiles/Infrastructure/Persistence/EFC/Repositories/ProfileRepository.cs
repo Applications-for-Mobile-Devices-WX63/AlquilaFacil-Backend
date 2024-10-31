@@ -1,4 +1,4 @@
-using AlquilaFacilPlatform.IAM.Domain.Model.Aggregates;
+
 using AlquilaFacilPlatform.Profiles.Domain.Model.Aggregates;
 using AlquilaFacilPlatform.Profiles.Domain.Repositories;
 using AlquilaFacilPlatform.Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -10,13 +10,8 @@ namespace AlquilaFacilPlatform.Profiles.Infrastructure.Persistence.EFC.Repositor
 
 public class ProfileRepository(AppDbContext context) : BaseRepository<Profile>(context), IProfileRepository
 {
-    
-    public async Task<List<Profile>> GetProfilesByDocumentNumber(string commandDocumentNumber)
+    public async Task<Profile?> FindByUserIdAsync(int userId)
     {
-        return await Context.Set<Profile>()
-            .Where(p => p.DocumentN.NumberDocument == commandDocumentNumber)
-            .ToListAsync();
+        return await context.Set<Profile>().FirstOrDefaultAsync(p => p.UserId == userId);
     }
-    
-    
 }

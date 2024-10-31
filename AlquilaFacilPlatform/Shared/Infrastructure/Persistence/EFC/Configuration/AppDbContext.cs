@@ -242,6 +242,26 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         
         builder.Entity<User>().HasMany<Notification>().WithOne().HasForeignKey(n => n.UserId);
         
+        builder.Entity<Comment>().HasKey(c => c.Id);
+        builder.Entity<Comment>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
+
+        builder.Entity<Comment>().OwnsOne(c => c.Text,
+            n =>
+            {
+                n.WithOwner().HasForeignKey("Id");
+                n.Property(g => g.Text).HasColumnName("Text");
+            });
+        
+        builder.Entity<Comment>().OwnsOne(c => c.Rating,
+            n =>
+            {
+                n.WithOwner().HasForeignKey("Id");
+                n.Property(g => g.Rating).HasColumnName("Rating");
+            });
+
+        builder.Entity<Comment>().HasOne<User>().WithMany().HasForeignKey(u => u.UserId);
+        builder.Entity<Comment>().HasOne<Local>().WithMany().HasForeignKey(l => l.LocalId);
+        
         
             
         /*builder.Entity<User>()

@@ -42,6 +42,15 @@ public class ProfilesController(
         var profileResource = ProfileResourceFromEntityAssembler.ToResourceFromEntity(profile);
         return Ok(profileResource);
     }
+    
+    [HttpGet("user/{userId}")]
+    public async Task<IActionResult> GetProfileByUserId(int userId)
+    {
+        var profile = await profileQueryService.Handle(new GetProfileByUserIdQuery(userId));
+        if (profile == null) return NotFound();
+        var profileResource = ProfileResourceFromEntityAssembler.ToResourceFromEntity(profile);
+        return Ok(profileResource);
+    }
 
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateFarm(int id,[FromBody] UpdateProfileResource updateProfileResource)
