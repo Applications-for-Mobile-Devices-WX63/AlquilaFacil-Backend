@@ -33,4 +33,9 @@ public class LocalRepository(AppDbContext context) : BaseRepository<Local>(conte
     {
         return await context.Set<Local>().Where(x => x.LocalCategoryId == categoryId && x.Capacity >= minCapacity && x.Capacity <= maxCapacity).ToListAsync();
     }
+
+    public async Task<IEnumerable<Local>> GetLocalsByUserIdAsync(int userId)
+    {
+        return await context.Set<Local>().Where(x => x.UserId == userId).ToListAsync();
+    }
 }

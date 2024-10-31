@@ -73,4 +73,13 @@ public class LocalsController(ILocalCommandService localCommandService, ILocalQu
         return Ok(districts);
     }
     
+    [HttpGet("get-user-locals/{userId:int}")]
+    public async Task<IActionResult> GetUserLocals(int userId)
+    {
+        var getUserLocalsQuery = new GetLocalsByUserIdQuery(userId);
+        var locals = await localQueryService.Handle(getUserLocalsQuery);
+        var localResources = locals.Select(LocalResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(localResources);
+    }
+    
 }
