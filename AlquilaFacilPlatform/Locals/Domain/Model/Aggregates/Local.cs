@@ -50,9 +50,24 @@ public partial class Local
         UserId = command.UserId;
     }
 
+
+    public void Update(UpdateLocalCommand command)
+    {
+        LName = new LocalName(command.LocalType);
+        Address = new StreetAddress(command.District, command.Street);
+        Price = new NightPrice(command.Price);
+        Description = new DescriptionMessage(command.DescriptionMessage);
+        Photo = new PhotoUrl(command.PhotoUrl);
+        Place = new CityPlace(command.Country, command.City);
+        LocalCategoryId = command.LocalCategoryId;
+        Features = command.Features;
+        Capacity = command.Capacity;
+        UserId = command.UserId;
+    }
+
     public int Id { get; }
     
-    public string Features { get; }
+    public string Features { get; set; }
     
     public int Capacity { get; set; }
     public LocalName LName { get; private set; }

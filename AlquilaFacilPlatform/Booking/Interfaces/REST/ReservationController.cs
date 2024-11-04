@@ -72,6 +72,7 @@ public class ReservationController(IReservationCommandService reservationCommand
         {
             return NotFound("Subscriptions not found for the given user ID.");
         }
+        
         var subscriptionDict = subscriptions
             .GroupBy(s => s.UserId)
             .ToDictionary(g => g.Key, g => g.First());

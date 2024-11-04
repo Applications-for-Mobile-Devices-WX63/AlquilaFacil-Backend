@@ -49,6 +49,7 @@ public class LocalCommandService (ILocalRepository localRepository, ILocalCatego
             throw new Exception("Price must be greater than 0");
         }
         localRepository.Update(local);
+        local.Update(command);
         await unitOfWork.CompleteAsync();
         return local;
     }
