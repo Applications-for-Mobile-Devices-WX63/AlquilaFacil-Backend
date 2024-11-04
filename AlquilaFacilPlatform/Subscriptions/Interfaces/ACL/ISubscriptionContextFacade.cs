@@ -4,6 +4,6 @@ namespace AlquilaFacilPlatform.Subscriptions.Interfaces.ACL;
 
 public interface ISubscriptionContextFacade
 {
-    Task<Subscription?> GetUserSubscriptionAsync(int userId);
+    Task<IEnumerable<Subscription>> GetSubscriptionByUsersId(List<int> usersId);
     bool IsUserSubscribed(int userId);
 }

@@ -4,6 +4,5 @@ namespace AlquilaFacilPlatform.Booking.Application.OutBoundService;
 
 public interface ISubscriptionInfoExternalService
 {
-    Task<Subscription?> GetUserSubscriptionAsync(int userId);
-    bool IsUserSubscribed(int userId);
+    Task<IEnumerable<Subscription>> GetSubscriptionByUsersId(List<int> usersId);
 }

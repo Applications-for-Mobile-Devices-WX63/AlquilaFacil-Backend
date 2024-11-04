@@ -9,4 +9,5 @@ public interface ISubscriptionQueryServices
     Task<IEnumerable<Subscription>> Handle(GetAllSubscriptionsQuery query);
     
     Task<Subscription?> Handle(GetSubscriptionByUserIdQuery query);
+    Task<IEnumerable<Subscription>> Handle(GetSubscriptionsByUserIdQuery query);
 }

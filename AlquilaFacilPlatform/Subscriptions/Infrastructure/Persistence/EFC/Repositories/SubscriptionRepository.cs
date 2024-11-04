@@ -14,4 +14,11 @@ public class SubscriptionRepository(AppDbContext context)
         return await context.Set<Subscription>()
             .FirstOrDefaultAsync(s => s.UserId == userId);
     }
+    
+    public async Task<IEnumerable<Subscription>> FindByUsersIdAsync(List<int> usersId)
+    {
+        return await context.Set<Subscription>()
+            .Where(s => usersId.Contains(s.UserId))
+            .ToListAsync();
+    }
 }

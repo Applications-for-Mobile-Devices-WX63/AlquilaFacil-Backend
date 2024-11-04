@@ -64,14 +64,12 @@ public class ReservationController(IReservationCommandService reservationCommand
         {
             return NotFound("Reservations not found for the given user ID.");
         }
-
-        var subscription = await subscriptionInfoExternalService.GetUserSubscriptionAsync(userId);
-        if (subscription == null)
+        var subscriptions = await subscriptionInfoExternalService.GetSubscriptionByUsersId(reservations.Select(r => r.UserId).ToList());
+        if (subscriptions == null)
         {
-            return NotFound("Subscription not found for the given user ID.");
+            return NotFound("Subscriptions not found for the given user ID.");
         }
-
-        var subscriptionResource = SubscriptionResourceFromEntityAssembler.ToResourceFromEntity(subscription);
+        var subscriptionResource = subscriptions.Select(SubscriptionResourceFromEntityAssembler.ToResourceFromEntity);
         var reservationDetailsResource = new ReservationDetailsResource(
             reservations.Select(ReservationResourceFromEntityAssembler.ToResourceFromEntity), subscriptionResource);
         return Ok(reservationDetailsResource);

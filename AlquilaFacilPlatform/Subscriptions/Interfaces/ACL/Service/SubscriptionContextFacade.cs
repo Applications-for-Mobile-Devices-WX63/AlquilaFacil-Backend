@@ -7,19 +7,24 @@ namespace AlquilaFacilPlatform.Subscriptions.Interfaces.ACL.Service;
 
 public class SubscriptionContextFacade(ISubscriptionQueryServices subscriptionQueryServices) : ISubscriptionContextFacade
 {
-    public async Task<Subscription?> GetUserSubscriptionAsync(int userId)
+    
+
+    public async Task<IEnumerable<Subscription>> GetSubscriptionByUsersId(List<int> usersId)
     {
-        var query = new GetSubscriptionByUserIdQuery(userId);
-        return await subscriptionQueryServices.Handle(query);
+        var query = new GetSubscriptionsByUserIdQuery(usersId);
+        var subscriptions = await subscriptionQueryServices.Handle(query);  
+        return subscriptions;
     }
 
     public bool IsUserSubscribed(int userId)
     {
-        var subscription = GetUserSubscriptionAsync(userId).Result;
+        var query = new GetSubscriptionByUserIdQuery(userId);
+        var subscription = subscriptionQueryServices.Handle(query).Result;
         if (subscription == null)
         {
             throw new Exception("Subscription not found");
         }
         return subscription.SubscriptionStatusId == (int)ESubscriptionStatus.Active;
+
     }
 }
