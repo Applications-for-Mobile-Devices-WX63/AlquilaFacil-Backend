@@ -59,21 +59,44 @@ public class ReservationController(IReservationCommandService reservationCommand
     public async Task<IActionResult> GetReservationUserDetailsAsync(int userId)
     {
         var query = new GetReservationsByOwnerIdQuery(userId);
+        var locals = new List<LocalReservationResource>();
+
         var reservations = await reservationQueryService.GetReservationsByOwnerIdAsync(query);
-        if (reservations == null)
+        if (reservations == null || !reservations.Any())
         {
             return NotFound("Reservations not found for the given user ID.");
         }
-        var subscriptions = await subscriptionInfoExternalService.GetSubscriptionByUsersId(reservations.Select(r => r.UserId).ToList());
-        if (subscriptions == null)
+
+        var subscriptions = await subscriptionInfoExternalService.GetSubscriptionByUsersId(reservations.Select(r => r.UserId).Distinct().ToList());
+        if (subscriptions == null || !subscriptions.Any())
         {
             return NotFound("Subscriptions not found for the given user ID.");
         }
-        var subscriptionResource = subscriptions.Select(SubscriptionResourceFromEntityAssembler.ToResourceFromEntity);
-        var reservationDetailsResource = new ReservationDetailsResource(
-            reservations.Select(ReservationResourceFromEntityAssembler.ToResourceFromEntity), subscriptionResource);
+        var subscriptionDict = subscriptions
+            .GroupBy(s => s.UserId)
+            .ToDictionary(g => g.Key, g => g.First());
+
+        foreach (var reservation in reservations)
+        {
+            if (subscriptionDict.TryGetValue(reservation.UserId, out var subscription))
+            {
+                var localReservationResource = new LocalReservationResource(
+                    reservation.Id,
+                    reservation.StartDate,
+                    reservation.EndDate,
+                    reservation.UserId,
+                    reservation.LocalId,
+                    subscription.SubscriptionStatusId == 0
+                );
+                locals.Add(localReservationResource);
+            }
+        }
+
+        var reservationDetailsResource = new ReservationDetailsResource(locals);
         return Ok(reservationDetailsResource);
     }
+
+
 
 
 

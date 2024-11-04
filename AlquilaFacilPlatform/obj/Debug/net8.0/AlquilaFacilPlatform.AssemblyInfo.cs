@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AlquilaFacilPlatform")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+38ff45de76da483c2b06d86abc937cd127bf0ae6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e7c7672c2e5ea6abdc506a3f54c43894fa6b3c26")]
 [assembly: System.Reflection.AssemblyProductAttribute("AlquilaFacilPlatform")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AlquilaFacilPlatform")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
