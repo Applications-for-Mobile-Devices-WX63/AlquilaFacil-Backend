@@ -22,4 +22,9 @@ public class ReservationRepository(AppDbContext context) : BaseRepository<Reserv
     {
            return await Context.Set<Reservation>().Where(r => r.EndDate == endDate).ToListAsync();
     }
+
+    public async Task<IEnumerable<Reservation>> GetReservationsByLocalIdAsync(List<int> localId)
+    {
+        return await Context.Set<Reservation>().Where(r => localId.Contains(r.LocalId)).ToListAsync();
+    }
 }

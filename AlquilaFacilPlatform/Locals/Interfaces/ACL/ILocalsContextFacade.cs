@@ -1,3 +1,5 @@
+using AlquilaFacilPlatform.Locals.Domain.Model.Aggregates;
+
 namespace AlquilaFacilPlatform.Locals.Interfaces.ACL;
 
 public interface ILocalsContextFacade
@@ -6,4 +8,6 @@ public interface ILocalsContextFacade
         int price, string photoUrl, string descriptionMessage, int localCategoryId, int userId,string features,int capacity);
 
     Task<bool> LocalExists(int localId);
+    
+    Task<IEnumerable<Local?>> GetLocalsByUserId(int userId);
 }

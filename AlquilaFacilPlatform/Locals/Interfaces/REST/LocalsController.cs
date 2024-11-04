@@ -34,6 +34,7 @@ public class LocalsController(ILocalCommandService localCommandService, ILocalQu
         var localResources = locals.Select(LocalResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(localResources);
     }
+    
 
     [HttpGet("{localId:int}")]
     public async Task<IActionResult> GetLocalById(int localId)

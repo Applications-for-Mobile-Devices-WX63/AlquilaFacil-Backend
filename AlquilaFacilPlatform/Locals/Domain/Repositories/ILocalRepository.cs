@@ -11,4 +11,5 @@ public interface ILocalRepository : IBaseRepository<Local>
    Task<IEnumerable<Local>> GetLocalsByCategoryIdAndCapacityrange(int categoryId, int minCapacity, int maxCapacity);
    
    Task<IEnumerable<Local>> GetLocalsByUserIdAsync(int userId);
+   
 }

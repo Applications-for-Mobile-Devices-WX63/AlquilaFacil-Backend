@@ -56,6 +56,8 @@ using AlquilaFacilPlatform.Subscriptions.Domain.Model.Commands;
 using AlquilaFacilPlatform.Subscriptions.Domain.Repositories;
 using AlquilaFacilPlatform.Subscriptions.Domain.Services;
 using AlquilaFacilPlatform.Subscriptions.Infrastructure.Persistence.EFC.Repositories;
+using AlquilaFacilPlatform.Subscriptions.Interfaces.ACL;
+using AlquilaFacilPlatform.Subscriptions.Interfaces.ACL.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -157,6 +159,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
 builder.Services.AddScoped<ISubscriptionCommandService, SubscriptionCommandService>();
 builder.Services.AddScoped<ISubscriptionQueryServices, SubscriptionQueryService>();
+builder.Services.AddScoped<ISubscriptionContextFacade, SubscriptionContextFacade>();
+builder.Services.AddScoped<ISubscriptionInfoExternalService,SubscriptionInfoExternalService>();
 builder.Services.AddScoped<IExternalUserWithSubscriptionService, ExternalUserWithSubscriptionService>();
 
 builder.Services.AddScoped<IPlanRepository, PlanRepository>();

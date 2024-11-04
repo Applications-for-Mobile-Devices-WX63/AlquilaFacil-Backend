@@ -1,3 +1,4 @@
+using AlquilaFacilPlatform.Locals.Domain.Model.Aggregates;
 using AlquilaFacilPlatform.Locals.Domain.Model.Commands;
 using AlquilaFacilPlatform.Locals.Domain.Model.Queries;
 using AlquilaFacilPlatform.Locals.Domain.Model.ValueObjects;
@@ -25,5 +26,16 @@ public class LocalsContextFacade(ILocalCommandService localCommandService, ILoca
         }
 
         return true;
+    }
+
+    public async Task<IEnumerable<Local?>> GetLocalsByUserId(int userId)
+    {
+        var query = new GetLocalsByUserIdQuery(userId);
+        var locals = await localQueryService.Handle(query);
+        if (locals == null)
+        {
+            throw new Exception("Local doesnt exists");
+        }
+        return locals;
     }
 }

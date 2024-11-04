@@ -9,5 +9,9 @@ namespace AlquilaFacilPlatform.Subscriptions.Infrastructure.Persistence.EFC.Repo
 public class SubscriptionRepository(AppDbContext context)
     : BaseRepository<Subscription>(context), ISubscriptionRepository
 {
-   
+    public async Task<Subscription?> FindByUserIdAsync(int userId)
+    {
+        return await context.Set<Subscription>()
+            .FirstOrDefaultAsync(s => s.UserId == userId);
+    }
 }

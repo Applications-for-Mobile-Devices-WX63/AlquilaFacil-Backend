@@ -5,5 +5,5 @@ namespace AlquilaFacilPlatform.Subscriptions.Domain.Repositories;
 
 public interface ISubscriptionRepository : IBaseRepository<Subscription>
 {
-    
+    Task<Subscription?> FindByUserIdAsync(int userId);
 }

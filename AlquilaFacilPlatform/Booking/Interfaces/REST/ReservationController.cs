@@ -1,9 +1,12 @@
 using System.Net.Mime;
+using AlquilaFacilPlatform.Booking.Application.OutBoundService;
 using AlquilaFacilPlatform.Booking.Domain.Model.Commands;
 using AlquilaFacilPlatform.Booking.Domain.Model.Queries;
 using AlquilaFacilPlatform.Booking.Domain.Services;
 using AlquilaFacilPlatform.Booking.Interfaces.REST.Resources;
 using AlquilaFacilPlatform.Booking.Interfaces.REST.Transform;
+using AlquilaFacilPlatform.Subscriptions.Domain.Model.Queries;
+using AlquilaFacilPlatform.Subscriptions.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 
@@ -12,7 +15,7 @@ namespace AlquilaFacilPlatform.Booking.Interfaces.REST;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
-public class ReservationController(IReservationCommandService reservationCommandService, IReservationQueryService reservationQueryService) : ControllerBase
+public class ReservationController(IReservationCommandService reservationCommandService, IReservationQueryService reservationQueryService, ISubscriptionInfoExternalService subscriptionInfoExternalService) : ControllerBase
 {
 
     [HttpPost]
@@ -51,6 +54,30 @@ public class ReservationController(IReservationCommandService reservationCommand
         var reservationResource = result.Select(ReservationResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(reservationResource);
     }
+
+    [HttpGet("reservation-user-details/{userId:int}")]
+    public async Task<IActionResult> GetReservationUserDetailsAsync(int userId)
+    {
+        var query = new GetReservationsByOwnerIdQuery(userId);
+        var reservations = await reservationQueryService.GetReservationsByOwnerIdAsync(query);
+        if (reservations == null)
+        {
+            return NotFound("Reservations not found for the given user ID.");
+        }
+
+        var subscription = await subscriptionInfoExternalService.GetUserSubscriptionAsync(userId);
+        if (subscription == null)
+        {
+            return NotFound("Subscription not found for the given user ID.");
+        }
+
+        var subscriptionResource = SubscriptionResourceFromEntityAssembler.ToResourceFromEntity(subscription);
+        var reservationDetailsResource = new ReservationDetailsResource(
+            reservations.Select(ReservationResourceFromEntityAssembler.ToResourceFromEntity), subscriptionResource);
+        return Ok(reservationDetailsResource);
+    }
+
+
 
     [HttpGet("by-start-date/{startDate}")]
     public async Task<IActionResult> GetReservationByStartDateAsync(DateTime startDate)
