@@ -68,29 +68,22 @@ public class ReservationController(IReservationCommandService reservationCommand
         }
 
         var subscriptions = await subscriptionInfoExternalService.GetSubscriptionByUsersId(reservations.Select(r => r.UserId).Distinct().ToList());
-        if (subscriptions == null || !subscriptions.Any())
-        {
-            return NotFound("Subscriptions not found for the given user ID.");
-        }
-        
         var subscriptionDict = subscriptions
             .GroupBy(s => s.UserId)
             .ToDictionary(g => g.Key, g => g.First());
 
         foreach (var reservation in reservations)
         {
-            if (subscriptionDict.TryGetValue(reservation.UserId, out var subscription))
-            {
-                var localReservationResource = new LocalReservationResource(
-                    reservation.Id,
-                    reservation.StartDate,
-                    reservation.EndDate,
-                    reservation.UserId,
-                    reservation.LocalId,
-                    subscription.SubscriptionStatusId == 0
-                );
-                locals.Add(localReservationResource);
-            }
+            subscriptionDict.TryGetValue(reservation.UserId, out var subscription);
+            var localReservationResource = new LocalReservationResource(
+                reservation.Id,
+                reservation.StartDate,
+                reservation.EndDate,
+                reservation.UserId,
+                reservation.LocalId,
+                subscription?.SubscriptionStatusId == 0 
+            );
+            locals.Add(localReservationResource);
         }
 
         var reservationDetailsResource = new ReservationDetailsResource(locals);
