@@ -38,7 +38,7 @@ public class LocalCommandService (ILocalRepository localRepository, ILocalCatego
         {
             throw new Exception("Local not found");
         }
-        var localCategory = localCategoryRepository.FindByIdAsync(command.LocalCategoryId);
+        var localCategory = await localCategoryRepository.FindByIdAsync(command.LocalCategoryId);
         if (localCategory == null)
         {
             throw new Exception("Local category not found");
