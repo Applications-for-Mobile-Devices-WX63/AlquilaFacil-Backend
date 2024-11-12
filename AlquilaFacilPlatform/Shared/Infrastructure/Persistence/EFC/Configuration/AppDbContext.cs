@@ -175,6 +175,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
                 e.Property(a => a.BirthDate).HasColumnName("BirthDate");
             });
         
+        builder.Entity<Profile>().Property(p => p.PhotoUrl).IsRequired();
         builder.Entity<Profile>().HasOne<User>().WithOne().HasForeignKey<Profile>(p => p.UserId);
         
         

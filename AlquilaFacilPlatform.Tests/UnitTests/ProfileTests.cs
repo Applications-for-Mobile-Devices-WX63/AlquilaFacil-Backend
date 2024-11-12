@@ -11,37 +11,25 @@ public class ProfileTests
     [Fact]
     public void Profile_Constructor_WithParameters_ShouldInitializeProperties()
     { 
-        string name = "John";
-        string? fatherName = "Doe";
-        string? motherName = "Smith";
-        string dateOfBirth = "1990-01-01";
-        string documentNumber = "12345678";
-        string phone = "123456789";
-        int userId = 1;
+        var command = new CreateProfileCommand("Jane", "Johnson", "Doe", "1995-02-15", "87654321", "987654321",1, "photoUrl");
+        var profile = new Profile(command);
         
-        var profile = new Profile(name, fatherName, motherName, dateOfBirth, documentNumber, phone,userId);
-        
-        Assert.Equal(name, profile.Name.Name);
-        Assert.Equal(fatherName, profile.Name.FatherName);
-        Assert.Equal(motherName, profile.Name.MotherName);
-        Assert.Equal(dateOfBirth, profile.Birth.BirthDate);
-        Assert.Equal(documentNumber, profile.DocumentN.NumberDocument);
-        Assert.Equal(phone, profile.PhoneN.PhoneNumber);
+        Assert.Equal(command.Name, profile.Name.Name);
+        Assert.Equal(command.FatherName, profile.Name.FatherName);
+        Assert.Equal(command.MotherName, profile.Name.MotherName);
+        Assert.Equal(command.DateOfBirth, profile.Birth.BirthDate);
+        Assert.Equal(command.DocumentNumber, profile.DocumentN.NumberDocument);
+        Assert.Equal(command.Phone, profile.PhoneN.PhoneNumber);
+        Assert.Equal(command.PhotoUrl, profile.PhotoUrl);
     }
 
     [Fact]
     public void Profile_Update_ShouldUpdateProperties()
     {
-        var profile = new Profile("Jane", "Johnson", "Doe", "1995-02-15", "87654321", "987654321",1);
-        var updateCommand = new UpdateProfileCommand(
-            99,
-            "New Jane",
-            "New Johnson",
-            "New Doe",
-            "2000-01-01",
-            "12345678",
-            "999999999",1
-        );
+        var command = new CreateProfileCommand("Jane", "Johnson", "Doe", "1995-02-15", "87654321", "987654321",1, "photoUrl");
+        var profile = new Profile(command);
+        var updateCommand = new UpdateProfileCommand(1, "Jane", "Johnson", "Doe", "1995-02-15", "87654321", "987654321", 1,"photoUrl");
+        
         
         profile.Update(updateCommand);
         

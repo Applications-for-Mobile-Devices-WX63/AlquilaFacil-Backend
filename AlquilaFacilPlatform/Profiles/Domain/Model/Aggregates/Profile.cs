@@ -13,16 +13,7 @@ public partial class Profile
         PhoneN = new Phone();
         DocumentN = new DocumentNumber();
         UserId = 0;
-    }
-
-    public Profile(string name, string? fatherName, string? motherName, string dateOfBirth, string documentNumber,
-        string phone,int userId) : this()
-    {
-        Name = new PersonName(name, fatherName, motherName);
-        Birth = new DateOfBirth(dateOfBirth);
-        PhoneN = new Phone(phone);
-        DocumentN = new DocumentNumber(documentNumber);
-        UserId = userId;
+        PhotoUrl = string.Empty;
     }
     
     public Profile(CreateProfileCommand command)
@@ -32,6 +23,7 @@ public partial class Profile
         PhoneN = new Phone(command.Phone);
         DocumentN = new DocumentNumber(command.DocumentNumber);
         UserId = command.UserId;
+        PhotoUrl = command.PhotoUrl;
     }
     
     public void Update(UpdateProfileCommand command)
@@ -40,9 +32,12 @@ public partial class Profile
         Birth = new DateOfBirth(command.DateOfBirth);
         PhoneN = new Phone(command.Phone);
         DocumentN = new DocumentNumber(command.DocumentNumber);
+        PhotoUrl = command.PhotoUrl;
     }
 
     public int Id { get; }
+
+    public string PhotoUrl { get; set; }
     public PersonName Name { get; private set; }
     public DateOfBirth Birth { get; private set; }
     public Phone PhoneN { get; private set; }

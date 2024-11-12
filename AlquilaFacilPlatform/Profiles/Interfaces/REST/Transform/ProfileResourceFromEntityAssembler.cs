@@ -13,6 +13,6 @@ public class ProfileResourceFromEntityAssembler
             entity.FullName, 
             entity.PhoneNumber, 
             entity.NumberDocument, 
-            entity.BirthDate,entity.UserId);
+            entity.BirthDate,entity.UserId, entity.PhotoUrl);
     }
 }

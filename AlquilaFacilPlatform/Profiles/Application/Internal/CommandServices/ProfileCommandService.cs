@@ -13,8 +13,7 @@ public class ProfileCommandService(IUserExternalService userExternalService,IPro
 {
     public async Task<Profile?> Handle(CreateProfileCommand command)
     {
-        var profile = new Profile(command.Name, command.FatherName, command.MotherName, command.DateOfBirth, 
-            command.DocumentNumber, command.Phone,command.UserId);
+        var profile = new Profile(command);
         var userExists = userExternalService.UserExistsById(command.UserId);
         if (!userExists)
         {
