@@ -246,6 +246,9 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<AppDbContext>();
     context.Database.EnsureCreated();
+
+    var planCommandService = services.GetRequiredService<IPlanCommandService>();
+    await planCommandService.Handle(new CreatePlanCommand("Plan Premium", "El plan premium te permitirá acceder a funcionalidades adicionales en la aplicación", 20));
     
     var subscriptionStatusCommandService = services.GetRequiredService<ISubscriptionStatusCommandService>();
     await subscriptionStatusCommandService.Handle(new SeedSubscriptionStatusCommand());

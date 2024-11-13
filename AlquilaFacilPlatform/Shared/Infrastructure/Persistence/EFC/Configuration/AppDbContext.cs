@@ -31,8 +31,8 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         
         builder.Entity<Plan>().HasKey(p => p.Id);
         builder.Entity<Plan>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<Plan>().Property(p => p.Name).IsRequired().HasMaxLength(30);
-        builder.Entity<Plan>().Property(p => p.Service).IsRequired().HasMaxLength(30);
+        builder.Entity<Plan>().Property(p => p.Name).IsRequired();
+        builder.Entity<Plan>().Property(p => p.Service).IsRequired();
         builder.Entity<Plan>().Property(p => p.Price).IsRequired() ;
 
         builder.Entity<Plan>().HasMany<Subscription>().WithOne().HasForeignKey(s => s.PlanId);

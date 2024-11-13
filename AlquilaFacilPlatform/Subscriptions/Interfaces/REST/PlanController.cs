@@ -8,28 +8,8 @@ namespace AlquilaFacilPlatform.Subscriptions.Interfaces.REST;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-public class PlanController(IPlanCommandService planCommandService, IPlanQueryService planQueryService) : ControllerBase
+public class PlanController(IPlanQueryService planQueryService) : ControllerBase
 {
-    [HttpPost]
-    public async Task<IActionResult> CreatePlan([FromBody] CreatePlanResource createPlanResource)
-    {
-        var createPlanCommand = CreatePlanCommandFromResourceAssembler.ToCommandFromResource(createPlanResource);
-        var plan = await planCommandService.Handle(createPlanCommand);
-        if (plan == null) return NotFound();
-        var resource = PlanResourceFromEntityAssembler.ToResourceFromEntity(plan);
-        return StatusCode(201, resource);
-    }
-    
-    [HttpGet("{planId:int}")]
-    public async Task<IActionResult> GetPlanById(int planId)
-    {
-        var getPlanByIdQuery = new GetPlanByIdQuery(planId);
-        var plan = await planQueryService.Handle(getPlanByIdQuery);
-        if (plan == null) return NotFound();
-        var resource = PlanResourceFromEntityAssembler.ToResourceFromEntity(plan);
-        return Ok(resource);
-    }
-    
     [HttpGet]
     public async Task<IActionResult> GetAllPlans()
     {
