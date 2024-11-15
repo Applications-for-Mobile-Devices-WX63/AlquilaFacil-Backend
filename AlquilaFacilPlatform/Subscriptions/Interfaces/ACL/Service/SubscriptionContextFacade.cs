@@ -16,10 +16,10 @@ public class SubscriptionContextFacade(ISubscriptionQueryServices subscriptionQu
         return subscriptions;
     }
 
-    public bool IsUserSubscribed(int userId)
+    public async Task<bool> IsUserSubscribed(int userId)
     {
         var query = new GetSubscriptionByUserIdQuery(userId);
-        var subscription = subscriptionQueryServices.Handle(query).Result;
+        var subscription = await subscriptionQueryServices.Handle(query);
         if (subscription == null)
         {
             throw new Exception("Subscription not found");

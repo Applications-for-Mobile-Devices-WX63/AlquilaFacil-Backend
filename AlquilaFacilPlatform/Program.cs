@@ -220,6 +220,7 @@ builder.Services.AddScoped<IProfileCommandService, ProfileCommandService>();
 builder.Services.AddScoped<IProfileQueryService, ProfileQueryService>();
 builder.Services.AddScoped<IProfilesContextFacade, ProfilesContextFacade>();
 builder.Services.AddScoped<IUserExternalService, UserExternalService>();
+builder.Services.AddScoped<ISubscriptionExternalService, SubscriptionExternalService>();
 
 
 builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();

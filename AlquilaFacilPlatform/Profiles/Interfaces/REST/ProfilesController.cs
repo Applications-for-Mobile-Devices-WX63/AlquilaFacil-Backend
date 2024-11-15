@@ -51,6 +51,14 @@ public class ProfilesController(
         var profileResource = ProfileResourceFromEntityAssembler.ToResourceFromEntity(profile);
         return Ok(profileResource);
     }
+    
+    [HttpGet("is-user-subscribed/{userId}")]
+    public async Task<IActionResult> IsUserSubscribed(int userId)
+    {
+        var query = new IsUserSubscribeQuery(userId);
+        var user = await profileQueryService.Handle(query);
+        return Ok(user);
+    }
 
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateFarm(int id,[FromBody] UpdateProfileResource updateProfileResource)
