@@ -12,5 +12,7 @@ public interface ILocalQueryService
     Task<IEnumerable<Local>> Handle(GetLocalsByUserIdQuery query);
     Task<IEnumerable<Local>> Handle(GetLocalsByCategoryIdAndCapacityRangeQuery query);
 
+    Task<bool> Handle(IsLocalOwnerQuery query);
+
 
 }

@@ -6,16 +6,8 @@ using AlquilaFacilPlatform.Locals.Domain.Services;
 
 namespace AlquilaFacilPlatform.Locals.Interfaces.ACL.Services;
 
-public class LocalsContextFacade(ILocalCommandService localCommandService, ILocalQueryService localQueryService) : ILocalsContextFacade
+public class LocalsContextFacade(ILocalQueryService localQueryService) : ILocalsContextFacade
 {
-    public async Task<int> CreateLocal(string district, string street, string localType, string country, string city, 
-                int price, string photoUrl, string descriptionMessage, int localCategoryId, int userId, string features,int capacity)
-    {
-        var createLocalCommand = new CreateLocalCommand(district, street, localType, country, city, price, photoUrl, descriptionMessage ,localCategoryId, userId,features,capacity);
-        var local = await localCommandService.Handle(createLocalCommand);
-        return local?.Id ?? 0;
-    }
-
     public async Task<bool> LocalExists(int localId)
     {
         var query = new GetLocalByIdQuery(localId);
@@ -37,5 +29,12 @@ public class LocalsContextFacade(ILocalCommandService localCommandService, ILoca
             throw new Exception("Local doesnt exists");
         }
         return locals;
+    }
+
+    public async Task<bool> IsLocalOwner(int userId, int localId)
+    {
+        var query = new IsLocalOwnerQuery(userId, localId);
+        var isOwner = await localQueryService.Handle(query);
+        return isOwner;
     }
 }

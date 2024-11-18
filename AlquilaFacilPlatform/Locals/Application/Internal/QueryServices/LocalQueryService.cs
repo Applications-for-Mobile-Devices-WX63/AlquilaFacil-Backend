@@ -33,4 +33,8 @@ public class LocalQueryService(ILocalRepository localRepository) : ILocalQuerySe
             query.MaxCapacity);
     }
 
+    public async Task<bool> Handle(IsLocalOwnerQuery query)
+    {
+        return await localRepository.IsOwnerAsync(query.UserId, query.LocalId);
+    }
 }

@@ -39,6 +39,11 @@ public class LocalRepository(AppDbContext context) : BaseRepository<Local>(conte
         return await context.Set<Local>().Where(x => x.UserId == userId).ToListAsync();
     }
 
+    public async Task<bool> IsOwnerAsync(int userId, int localId)
+    {
+        return await context.Set<Local>().AnyAsync(x => x.UserId == userId && x.Id == localId);
+    }
+
     public async Task<Local?> GetLocalByUserId(int userId, int localId)
     {
         return await context.Set<Local>().FirstOrDefaultAsync(x => x.UserId == userId && x.Id == localId);

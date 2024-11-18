@@ -1,14 +1,10 @@
 using System.Net.Mime;
 using AlquilaFacilPlatform.Booking.Application.OutBoundService;
-using AlquilaFacilPlatform.Booking.Domain.Model.Commands;
 using AlquilaFacilPlatform.Booking.Domain.Model.Queries;
 using AlquilaFacilPlatform.Booking.Domain.Services;
 using AlquilaFacilPlatform.Booking.Interfaces.REST.Resources;
 using AlquilaFacilPlatform.Booking.Interfaces.REST.Transform;
-using AlquilaFacilPlatform.Subscriptions.Domain.Model.Queries;
-using AlquilaFacilPlatform.Subscriptions.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace AlquilaFacilPlatform.Booking.Interfaces.REST;
 

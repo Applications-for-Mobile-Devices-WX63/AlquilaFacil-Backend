@@ -37,6 +37,11 @@ public class ReservationCommandService(
          throw new Exception("End date must be greater than current date");
      }
 
+     if (await reservationLocalExternalService.IsLocalOwner(reservation.UserId, reservation.LocalId))
+     {
+            throw new BadHttpRequestException("User is the owner of the local, he cannot make a reservation");
+     }
+
      var reservationCreated = new Reservation(reservation);
      await reservationRepository.AddAsync(reservationCreated);
      await unitOfWork.CompleteAsync();
