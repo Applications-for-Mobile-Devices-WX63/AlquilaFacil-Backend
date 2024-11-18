@@ -262,6 +262,14 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
 
         builder.Entity<Comment>().HasOne<User>().WithMany().HasForeignKey(u => u.UserId);
         builder.Entity<Comment>().HasOne<Local>().WithMany().HasForeignKey(l => l.LocalId);
+
+        builder.Entity<Report>().HasKey(report => report.Id);
+        builder.Entity<Report>().Property(report => report.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Report>().Property(report => report.Description).IsRequired();
+        builder.Entity<Report>().Property(report => report.Title).IsRequired();
+        builder.Entity<Report>().Property(report => report.CreatedAt).IsRequired();
+        builder.Entity<Report>().HasOne<User>().WithMany().HasForeignKey(r => r.UserId);
+        builder.Entity<Report>().HasOne<Local>().WithMany().HasForeignKey(r => r.LocalId);
         
         
             
