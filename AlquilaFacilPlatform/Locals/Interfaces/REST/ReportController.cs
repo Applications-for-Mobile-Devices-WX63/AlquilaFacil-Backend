@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace AlquilaFacilPlatform.Locals.Interfaces.REST;
 
 [ApiController]
-[Produces(MediaTypeNames.Application.Json)]
 [Route("api/v1/[controller]")]
+[Produces(MediaTypeNames.Application.Json)]
 public class ReportController(IReportQueryService reportQueryService, IReportCommandService reportCommandService) : ControllerBase
 {
     [HttpPost]
@@ -22,7 +22,7 @@ public class ReportController(IReportQueryService reportQueryService, IReportCom
         return StatusCode(201, reportResource);
     }
     
-    [HttpGet("/get-by-user-id/{userId:int}")]
+    [HttpGet("get-by-user-id/{userId:int}")]
     public async Task<IActionResult> GetReportsByUserId(int userId)
     {
         var query = new GetReportsByUserIdQuery(userId);
@@ -31,7 +31,7 @@ public class ReportController(IReportQueryService reportQueryService, IReportCom
         return Ok(reportResources);
     }
     
-    [HttpGet("/get-by-local-id/{localId:int}")]
+    [HttpGet("get-by-local-id/{localId:int}")]
     public async Task<IActionResult> GetReportsByLocalId(int localId)
     {
         var query = new GetReportsByLocalIdQuery(localId);
