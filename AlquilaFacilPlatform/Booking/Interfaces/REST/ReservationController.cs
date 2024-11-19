@@ -77,7 +77,7 @@ public class ReservationController(IReservationCommandService reservationCommand
                 reservation.EndDate,
                 reservation.UserId,
                 reservation.LocalId,
-                subscription?.SubscriptionStatusId == 0 
+                subscription?.PlanId == 1
             );
             locals.Add(localReservationResource);
         }
