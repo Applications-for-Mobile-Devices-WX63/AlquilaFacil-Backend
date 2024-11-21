@@ -15,4 +15,16 @@ public class NotificationCommandService(IUnitOfWork unitOfWork, INotificationRep
         await unitOfWork.CompleteAsync();
         return notification;
     }
+
+    public async Task<Notification> Handle(DeleteNotificationCommand command)
+    {
+        var notification = await notificationRepository.FindByIdAsync(command.Id);
+        if (notification == null)
+        {
+            throw new Exception("Notification not found");
+        }
+        notificationRepository.Remove(notification);
+        await unitOfWork.CompleteAsync();
+        return notification;
+    }
 }

@@ -6,4 +6,5 @@ namespace AlquilaFacilPlatform.Notifications.Domain.Services;
 public interface INotificationCommandService
 {
     Task<Notification> Handle(CreateNotificationCommand command);
+    Task<Notification> Handle(DeleteNotificationCommand command);
 }

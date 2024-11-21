@@ -1,4 +1,5 @@
 using System.Net.Mime;
+using AlquilaFacilPlatform.Notifications.Domain.Models.Commands;
 using AlquilaFacilPlatform.Notifications.Domain.Models.Queries;
 using AlquilaFacilPlatform.Notifications.Domain.Services;
 using AlquilaFacilPlatform.Notifications.Interfaces.REST.Resources;
@@ -29,5 +30,13 @@ public class NotificationController(INotificationCommandService notificationComm
         var notifications = await notificationQueryService.Handle(query);
         var notificationResources = notifications.Select(NotificationResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(notificationResources);
+    }
+    
+    [HttpDelete("{notificationId}")]
+    public async Task<IActionResult> DeleteNotification(int notificationId)
+    {
+        var command = new DeleteNotificationCommand(notificationId);
+        var notification = await notificationCommandService.Handle(command);
+        return StatusCode(200, notification);
     }
 }
